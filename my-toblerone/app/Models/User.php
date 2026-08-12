@@ -31,10 +31,6 @@ class User extends Authenticatable
         return $this->hasOne(Owner::class, 'user_id', 'id');
     }
 
-    /**
-     * A user MAY have a customer profile attached.
-     * If this relation is null, the user is not registered as a customer.
-     */
     public function customer(): HasOne
     {
         return $this->hasOne(Customer::class, 'user_id', 'id');

@@ -35,9 +35,6 @@ class Restaurant extends Model
         ];
     }
 
-    /**
-     * owner_id points to owners.user_id, not owners.id.
-     */
     public function owner(): BelongsTo
     {
         return $this->belongsTo(Owner::class, 'owner_id', 'user_id');
