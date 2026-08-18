@@ -23,9 +23,6 @@ class Review extends Model
         return $this->belongsTo(Restaurant::class);
     }
 
-    /**
-     * customer_id points to customers.user_id, not customers.id.
-     */
     public function customer(): BelongsTo
     {
         return $this->belongsTo(Customer::class, 'customer_id', 'user_id');

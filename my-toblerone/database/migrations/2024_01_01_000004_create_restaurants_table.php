@@ -10,8 +10,6 @@ return new class extends Migration
     {
         Schema::create('restaurants', function (Blueprint $table) {
             $table->id();
-            // References owners.user_id (not owners.id -- owners has no
-            // separate id column, its primary key IS user_id).
             $table->foreignId('owner_id')->constrained('owners', 'user_id')->cascadeOnDelete();
             $table->string('name');
             $table->text('description')->nullable();
