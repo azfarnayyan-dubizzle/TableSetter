@@ -2,48 +2,55 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
+    use HasApiTokens, HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
     protected $fillable = [
         'name',
         'email',
         'password',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
     /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
+     * A user MAY have an owner profile attached.
+     * If this relation is null, the user is not registered as an owner.
      */
-    protected function casts(): array
+    public function owner(): HasOne
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->hasOne(Owner::class, 'user_id', 'id');
+    }
+
+    /**
+     * A user MAY have a customer profile attached.
+     * If this relation is null, the user is not registered as a customer.
+     */
+    public function customer(): HasOne
+    {
+        return $this->hasOne(Customer::class, 'user_id', 'id');
+    }
+
+    /**
+     * Convenience helpers so controllers/middleware read cleanly,
+     * e.g. if ($user->isOwner()) { ... }
+     */
+    public function isOwner(): bool
+    {
+        return $this->owner()->exists();
+    }
+
+    public function isCustomer(): bool
+    {
+        return $this->customer()->exists();
     }
 }
