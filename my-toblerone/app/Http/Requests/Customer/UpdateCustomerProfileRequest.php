@@ -17,7 +17,6 @@ class UpdateCustomerProfileRequest extends FormRequest
             'phone_number' => ['nullable', 'string', 'max:20'],
             'date_of_birth' => ['nullable', 'date'],
             'dietary_preferences' => ['nullable', 'string'],
-            // loyalty_points intentionally excluded -- system-awarded only.
         ];
     }
 }
