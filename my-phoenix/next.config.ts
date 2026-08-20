@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  reactStrictMode: true,
+  transpilePackages: ["antd", "@ant-design/icons", "rc-util", "rc-picker", "rc-pagination"],
 };
 
 export default nextConfig;

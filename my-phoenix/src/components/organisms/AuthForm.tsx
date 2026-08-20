@@ -2,12 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Alert, Button, Card, Form, Input } from "antd";
-import FormItem from "antd/es/form/FormItem";
-import InputPassword from "antd/es/input/Password";
-import Text from "antd/es/typography/Text";
-import Title from "antd/es/typography/Title";
-import Paragraph from "antd/es/typography/Paragraph";
+import { Alert, Button, Card, Form, Input, Typography } from "antd";
 import { useState } from "react";
 
 import { extractErrorMessage, type Role } from "@/lib/api";
@@ -52,7 +47,7 @@ export function AuthForm({ role, mode }: { role: Role; mode: Mode }) {
         password: values.password,
         ...(isRegister ? { password_confirmation: values.password_confirmation ?? "" } : {}),
       });
-      router.push(role === "owner" ? "/owner/dashboard" : "/customer/dashboard");
+      await router.push(role === "owner" ? "/owner/dashboard" : "/customer/dashboard");
     } catch (e) {
       setError(extractErrorMessage(e, "Unable to authenticate. Please try again."));
     } finally {
@@ -62,27 +57,27 @@ export function AuthForm({ role, mode }: { role: Role; mode: Mode }) {
 
   return (
     <Card style={{ width: "100%", maxWidth: 460 }} styles={{ body: { padding: 32 } }}>
-      <Text style={{ color: BRAND.red, fontWeight: 700, letterSpacing: 1 }}>
+      <Typography.Text style={{ color: BRAND.red, fontWeight: 700, letterSpacing: 1 }}>
         {COPY[role].label.toUpperCase()}
-      </Text>
-      <Title level={2} style={{ marginTop: 8, marginBottom: 4 }}>
+      </Typography.Text>
+      <Typography.Title level={2} style={{ marginTop: 8, marginBottom: 4 }}>
         {isRegister ? "Create your account" : "Welcome back"}
-      </Title>
-      <Paragraph type="secondary">{COPY[role].blurb}</Paragraph>
+      </Typography.Title>
+      <Typography.Paragraph type="secondary">{COPY[role].blurb}</Typography.Paragraph>
 
       {error && <Alert type="error" message={error} showIcon style={{ marginBottom: 20 }} />}
 
       <Form<FormValues> layout="vertical" onFinish={onFinish} requiredMark={false} size="large">
         {isRegister && (
-          <FormItem
+          <Form.Item
             name="name"
             label="Full name"
             rules={[{ required: true, message: "Please enter your name" }, { max: 255 }]}
           >
             <Input placeholder="Jane Doe" autoComplete="name" />
-          </FormItem>
+          </Form.Item>
         )}
-        <FormItem
+        <Form.Item
           name="email"
           label="Email"
           rules={[
@@ -91,8 +86,8 @@ export function AuthForm({ role, mode }: { role: Role; mode: Mode }) {
           ]}
         >
           <Input placeholder="you@example.com" autoComplete="email" />
-        </FormItem>
-        <FormItem
+        </Form.Item>
+        <Form.Item
           name="password"
           label="Password"
           rules={[
@@ -100,13 +95,13 @@ export function AuthForm({ role, mode }: { role: Role; mode: Mode }) {
             ...(isRegister ? [{ min: 8, message: "Use at least 8 characters" }] : []),
           ]}
         >
-          <InputPassword
+          <Input.Password
             placeholder="••••••••"
             autoComplete={isRegister ? "new-password" : "current-password"}
           />
-        </FormItem>
+        </Form.Item>
         {isRegister && (
-          <FormItem
+          <Form.Item
             name="password_confirmation"
             label="Confirm password"
             dependencies={["password"]}
@@ -120,27 +115,27 @@ export function AuthForm({ role, mode }: { role: Role; mode: Mode }) {
               }),
             ]}
           >
-            <InputPassword placeholder="••••••••" autoComplete="new-password" />
-          </FormItem>
+            <Input.Password placeholder="••••••••" autoComplete="new-password" />
+          </Form.Item>
         )}
         <Button type="primary" htmlType="submit" block loading={loading}>
           {isRegister ? "Create account" : "Log in"}
         </Button>
       </Form>
 
-      <Paragraph style={{ marginTop: 20, marginBottom: 0, textAlign: "center" }}>
+      <Typography.Paragraph style={{ marginTop: 20, marginBottom: 0, textAlign: "center" }}>
         {isRegister ? "Already have an account? " : "New to Tablesetter? "}
         <Link href={role === "owner" ? `/owner/${other}` : `/customer/${other}`}>
           {isRegister ? "Log in" : "Create an account"}
         </Link>
-      </Paragraph>
-      <Paragraph type="secondary" style={{ textAlign: "center", marginBottom: 0 }}>
+      </Typography.Paragraph>
+      <Typography.Paragraph type="secondary" style={{ textAlign: "center", marginBottom: 0 }}>
         {role === "owner" ? (
           <Link href="/customer/login">I&apos;m a diner instead</Link>
         ) : (
           <Link href="/owner/login">I own a restaurant</Link>
         )}
-      </Paragraph>
+      </Typography.Paragraph>
     </Card>
   );
 }
