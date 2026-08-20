@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\CustomerAuthController;
 use App\Http\Controllers\Auth\OwnerAuthController;
+use App\Http\Controllers\Owner\AnalyticsController;
 use App\Http\Controllers\Customer\DiningLogController;
 use App\Http\Controllers\Customer\ProfileController as CustomerProfileController;
 use App\Http\Controllers\Customer\ReviewController as CustomerReviewController;
@@ -66,6 +67,8 @@ Route::middleware(['auth:sanctum', 'owner'])->prefix('owner')->group(function ()
 
     Route::get('restaurants/{restaurant}/reviews', [OwnerReviewController::class, 'index']);
     Route::post('reviews/{review}/reply', [OwnerReviewController::class, 'reply']);
+
+    Route::get('restaurants/{restaurant}/analytics', [AnalyticsController::class, 'restaurant']);
 });
 
 /*

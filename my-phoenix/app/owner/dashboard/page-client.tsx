@@ -1,7 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { Alert, Button, Card, Col, Empty, Row, Skeleton, Space, Typography } from "antd";
+import Alert from "antd/es/alert";
+import Button from "antd/es/button";
+import Card from "antd/es/card";
+import Col from "antd/es/col";
+import Empty from "antd/es/empty";
+import Row from "antd/es/row";
+import Skeleton from "antd/es/skeleton";
+import Space from "antd/es/space";
+import Text from "antd/es/typography/Text";
+import Paragraph from "antd/es/typography/Paragraph";
 
 import { PriceRangeTag } from "@/components/atoms/PriceTag";
 import { RatingStars } from "@/components/atoms/RatingStars";
@@ -9,7 +18,6 @@ import { DashboardLayout } from "@/components/templates/DashboardLayout";
 import { extractErrorMessage } from "@/lib/api";
 import { useAuthToken } from "@/lib/auth";
 import { useOwnerRestaurants } from "@/lib/hooks";
-
 
 export default function OwnerDashboard() {
   const { token } = useAuthToken("owner");
@@ -51,22 +59,25 @@ export default function OwnerDashboard() {
               <Card
                 title={restaurant.name}
                 extra={
-                  <Link href={`/owner/restaurants/${String(restaurant.id)}`}>
-                    Manage
-                  </Link>
+                  <Space size={12}>
+                    <Link href={`/owner/restaurants/${String(restaurant.id)}/analytics`}>
+                      Analytics
+                    </Link>
+                    <Link href={`/owner/restaurants/${String(restaurant.id)}`}>
+                      Manage
+                    </Link>
+                  </Space>
                 }
               >
                 <Space direction="vertical" size={8} style={{ width: "100%" }}>
                   <Space wrap>
-                    <Typography.Text type="secondary">
-                      {restaurant.cuisine_type ?? "Cuisine n/a"}
-                    </Typography.Text>
+                    <Text type="secondary">{restaurant.cuisine_type ?? "Cuisine n/a"}</Text>
                     <PriceRangeTag range={restaurant.price_range} />
                   </Space>
                   <RatingStars value={restaurant.average_rating} count={restaurant.reviews_count} />
-                  <Typography.Paragraph type="secondary" ellipsis={{ rows: 2 }} style={{ marginBottom: 0 }}>
+                  <Paragraph type="secondary" ellipsis={{ rows: 2 }} style={{ marginBottom: 0 }}>
                     {restaurant.description ?? "No description yet"}
-                  </Typography.Paragraph>
+                  </Paragraph>
                 </Space>
               </Card>
             </Col>
