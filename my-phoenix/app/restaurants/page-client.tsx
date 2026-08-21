@@ -59,12 +59,19 @@ export default function RestaurantsPage() {
 
   return (
     <PublicLayout>
-      <Typography.Title level={2}>Browse restaurants</Typography.Title>
-      <Typography.Paragraph type="secondary">
-        Filter by cuisine, price range and minimum rating.
-      </Typography.Paragraph>
+      <div style={{ marginBottom: 26 }}>
+        <span className="ts-eyebrow" style={{ color: "#D7263D" }}>
+          The directory
+        </span>
+        <Typography.Title level={2} style={{ marginTop: 8, marginBottom: 6 }}>
+          Browse restaurants
+        </Typography.Title>
+        <Typography.Paragraph type="secondary" style={{ marginBottom: 0, fontSize: 16 }}>
+          Filter by cuisine, price range and minimum rating.
+        </Typography.Paragraph>
+      </div>
 
-      <Card style={{ marginBottom: 24 }}>
+      <Card style={{ marginBottom: 28 }} styles={{ body: { padding: 24 } }}>
         <Row gutter={[16, 16]} align="middle">
           <Col xs={24} md={8}>
             <Typography.Text strong>Cuisine</Typography.Text>

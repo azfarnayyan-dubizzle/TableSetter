@@ -6,7 +6,8 @@ import { BRAND } from "@/lib/theme";
 import { toNumber } from "@/lib/unwrap";
 
 export function formatMoney(value: number | string | null | undefined): string {
-  return `$${toNumber(value, 0).toFixed(2)}`;
+  const amount = Math.round(toNumber(value, 0));
+  return `Rs ${amount.toLocaleString("en-PK")}`;
 }
 
 export function PriceTag({ amount }: { amount: number | string | null | undefined }) {

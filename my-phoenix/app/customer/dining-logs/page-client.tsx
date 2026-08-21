@@ -18,7 +18,7 @@ import type { DiningLog } from "@/lib/types";
 import { toNumber } from "@/lib/unwrap";
 
 
-const money = (value: unknown) => `$${toNumber(value).toFixed(2)}`;
+const money = (value: unknown) => `Rs ${Math.round(toNumber(value)).toLocaleString("en-PK")}`;
 
 export default function DiningLogsPage() {
   const { token } = useAuthToken("customer");

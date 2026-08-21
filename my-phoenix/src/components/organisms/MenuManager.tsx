@@ -236,7 +236,7 @@ export function MenuManager({ restaurantId }: { restaurantId: string }) {
               { type: "number", min: 0, message: "Price cannot be negative" },
             ]}
           >
-            <InputNumber min={0} step={0.5} precision={2} prefix="$" style={{ width: "100%" }} />
+            <InputNumber min={0} step={1} precision={0} prefix="Rs" style={{ width: "100%" }} />
           </Form.Item>
           <Form.Item name="is_available" label="Available" valuePropName="checked">
             <Switch />

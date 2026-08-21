@@ -54,23 +54,23 @@ export function PublicLayout({ children }: { children: ReactNode }) {
 
           width: "calc(100% - 28px)",
           maxWidth: 1200,
-          height: 80,
+          height: 76,
 
           margin: "0 auto",
-          padding: "8px 14px",
+          padding: "8px 16px",
 
-          borderRadius: 18,
-          border: `1px solid ${BRAND.border}`,
+          borderRadius: 999,
+          border: `1px solid ${scrolled ? "rgba(26,24,23,0.10)" : BRAND.border}`,
 
-          background: BRAND.creamDarker,
+          background: "rgba(255,255,255,0.78)",
           backdropFilter: "saturate(140%) blur(14px)",
           WebkitBackdropFilter: "saturate(140%) blur(14px)",
 
           boxShadow: scrolled
-            ? "0 10px 30px rgba(31, 29, 27, 0.12)"
-            : "0 4px 18px rgba(31, 29, 27, 0.06)",
+            ? "0 14px 40px rgba(26, 24, 23, 0.14)"
+            : "0 6px 22px rgba(26, 24, 23, 0.06)",
 
-          transition: "box-shadow 0.2s ease, transform 0.2s ease",
+          transition: "box-shadow 0.3s ease, background 0.3s ease, border-color 0.3s ease",
         }}
       >
         <Link
@@ -124,7 +124,8 @@ export function PublicLayout({ children }: { children: ReactNode }) {
         <div style={{ maxWidth: 1200, margin: "0 auto", padding: "48px 24px 96px" }}>{children}</div>
       </Layout.Content>
 
-      <Layout.Footer style={{ background: BRAND.charcoal, padding: "56px 24px 40px" }}>
+      <Layout.Footer className="ts-grain"
+        style={{ background: BRAND.gradientInk, padding: "68px 24px 44px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <div
             style={{
@@ -133,7 +134,7 @@ export function PublicLayout({ children }: { children: ReactNode }) {
               flexWrap: "wrap",
               justifyContent: "space-between",
               paddingBottom: 32,
-              borderBottom: "1px solid rgba(253,248,240,0.12)",
+              borderBottom: "1px solid rgba(253,248,240,0.14)",
             }}
           >
             <div style={{ maxWidth: 300 }}>
@@ -175,7 +176,8 @@ export function PublicLayout({ children }: { children: ReactNode }) {
                   <Link
                     key={link.label}
                     href={link.to}
-                    style={{ color: "#D8D2CA", textDecoration: "none", fontSize: 14 }}
+                    className="ts-footer-link"
+                    style={{ color: "#CFC8C0", textDecoration: "none", fontSize: 14 }}
                   >
                     {link.label}
                   </Link>

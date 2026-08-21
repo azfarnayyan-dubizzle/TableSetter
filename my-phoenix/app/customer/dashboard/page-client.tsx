@@ -41,7 +41,7 @@ export default function CustomerDashboardPage() {
           <StatCard
             icon={<DollarOutlined />}
             label={`Spent in ${dayjs().format("MMMM")}`}
-            value={`$${toAmount(summary?.total_spent).toFixed(2)}`}
+            value={`Rs ${Math.round(toAmount(summary?.total_spent)).toLocaleString("en-PK")}`}
             loading={summaryPending}
             footer={<DeltaBadge percent={delta} />}
           />

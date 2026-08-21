@@ -152,22 +152,48 @@
   --ts-red: #d7263d;
   --ts-red-dark: #a81b2e;
   --ts-red-soft: #fbe7e9;
-  --ts-cream: #fdf8f0;
-  --ts-cream-deep: #f6eee1;
-  --ts-cream-darker: #f2e8d8;
-  --ts-charcoal: #1f1d1b;
-  --ts-gray: #6e6963;
-  --ts-border: rgba(31, 29, 27, 0.08);
-  --ts-shadow-sm: 0 1px 2px rgba(31, 29, 27, 0.04), 0 4px 14px rgba(168, 27, 46, 0.06);
-  --ts-shadow-md: 0 2px 6px rgba(31, 29, 27, 0.05), 0 14px 32px rgba(168, 27, 46, 0.1);
-  --ts-shadow-lg: 0 8px 20px rgba(31, 29, 27, 0.08), 0 32px 64px rgba(168, 27, 46, 0.16);
+  --ts-cream: #faf4ea;
+  --ts-cream-deep: #f5ede0;
+  --ts-cream-darker: #ffffff;
+  --ts-charcoal: #1a1817;
+  --ts-gray: #6b655f;
+  --ts-border: rgba(26, 24, 23, 0.07);
+  --ts-shadow-sm: 0 1px 2px rgba(26, 24, 23, 0.04), 0 6px 16px rgba(140, 20, 38, 0.05);
+  --ts-shadow-md: 0 2px 8px rgba(26, 24, 23, 0.05), 0 18px 40px rgba(140, 20, 38, 0.09);
+  --ts-shadow-lg: 0 10px 24px rgba(26, 24, 23, 0.08), 0 40px 80px rgba(140, 20, 38, 0.16);
   --ts-ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 body {
-  background: var(--ts-cream);
+  background-color: var(--ts-cream);
+  background-image:
+    radial-gradient(1100px 620px at 8% -8%, rgba(215, 38, 61, 0.07), transparent 62%),
+    radial-gradient(900px 520px at 102% 4%, rgba(201, 138, 43, 0.09), transparent 60%);
+  background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgba(215, 38, 61, 0.16);
+  color: var(--ts-charcoal);
+}
+
+*::-webkit-scrollbar {
+  width: 11px;
+  height: 11px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(26, 24, 23, 0.18);
+  border: 3px solid transparent;
+  border-radius: 999px;
+  background-clip: content-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(215, 38, 61, 0.45);
+  background-clip: content-box;
 }
 
 /* ---------- Typography ---------- */
@@ -471,4 +497,287 @@ p.ant-typography {
   background: rgba(240, 236, 228, 0.386);
 
   z-index: -1;
+}
+
+
+/* ============================================================
+   Tablesetter — premium polish v2
+   ============================================================ */
+
+/* Cards sit on white so the cream page reads as depth, not flatness */
+.ant-card {
+  background: #ffffff;
+  border-radius: 20px !important;
+  transition:
+    transform 0.35s var(--ts-ease),
+    box-shadow 0.35s var(--ts-ease),
+    border-color 0.35s var(--ts-ease);
+}
+
+.ant-card-hoverable:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--ts-shadow-lg);
+  border-color: rgba(215, 38, 61, 0.22) !important;
+}
+
+/* Section rhythm helpers */
+.ts-section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.ts-rule {
+  height: 1px;
+  background: linear-gradient(90deg, rgba(215, 38, 61, 0.35), rgba(26, 24, 23, 0.06) 45%, transparent);
+  border: 0;
+  margin: 0;
+}
+
+/* Gradient headline accent */
+.ts-accent {
+  background: linear-gradient(120deg, #e8384f 0%, #b81e33 60%, #8e1626 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Frosted pill chips */
+.ts-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--ts-charcoal);
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid var(--ts-border);
+  border-radius: 999px;
+  box-shadow: var(--ts-shadow-sm);
+  backdrop-filter: blur(8px);
+}
+
+/* Glass panels */
+.ts-glass {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: saturate(150%) blur(16px);
+  -webkit-backdrop-filter: saturate(150%) blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: var(--ts-shadow-md);
+}
+
+/* Fine grain texture for dark panels */
+.ts-grain {
+  position: relative;
+  isolation: isolate;
+}
+
+.ts-grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 4px 4px;
+  border-radius: inherit;
+  z-index: 0;
+}
+
+/* Buttons: crisper motion + soft sheen */
+.ant-btn {
+  font-weight: 600;
+  letter-spacing: 0.005em;
+}
+
+.ant-btn-primary {
+  background-image: linear-gradient(135deg, #e8384f 0%, #b81e33 55%, #8e1626 100%);
+  box-shadow: 0 8px 20px rgba(184, 30, 51, 0.24);
+}
+
+.ant-btn-primary:not(:disabled):hover {
+  background-image: linear-gradient(135deg, #f04058 0%, #c02236 55%, #7e1222 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(184, 30, 51, 0.32);
+}
+
+.ant-btn-default {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.ant-btn-default:not(:disabled):hover {
+  box-shadow: 0 8px 20px rgba(215, 38, 61, 0.14);
+}
+
+/* Inputs */
+.ant-input,
+.ant-input-affix-wrapper,
+.ant-select-selector,
+.ant-picker,
+.ant-input-number {
+  border-radius: 14px !important;
+  background: #ffffff !important;
+}
+
+.ant-input-search .ant-input-group-addon .ant-btn {
+  border-radius: 0 14px 14px 0 !important;
+}
+
+/* Tables */
+.ant-table-wrapper .ant-table {
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.ant-table-thead > tr > th {
+  font-size: 12px !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700 !important;
+}
+
+.ant-table-tbody > tr:hover > td {
+  background: rgba(215, 38, 61, 0.04) !important;
+}
+
+/* Tags */
+.ant-tag {
+  border-radius: 999px;
+  padding-inline: 10px;
+  font-weight: 600;
+  border-color: transparent;
+}
+
+/* Menu / sider */
+.ts-sider .ant-menu-item {
+  font-weight: 550;
+}
+
+.ts-sider .ant-menu-item-selected {
+  box-shadow: inset 3px 0 0 var(--ts-red);
+  background: linear-gradient(90deg, rgba(215, 38, 61, 0.12), rgba(215, 38, 61, 0.02)) !important;
+}
+
+/* Skeleton shimmer on white */
+.ant-skeleton-content .ant-skeleton-title,
+.ant-skeleton-content .ant-skeleton-paragraph > li,
+.ts-shimmer {
+  background: linear-gradient(90deg, #f1ebe2 25%, #fbf7f1 37%, #f1ebe2 63%) !important;
+}
+
+/* Card media taller + richer hover */
+.ts-card-media {
+  border-radius: 16px;
+}
+
+.ant-card-hoverable:hover .ts-card-media-inner {
+  transform: scale(1.08);
+}
+
+/* Nav link underline */
+.ts-nav-link .ant-btn-text {
+  position: relative;
+}
+
+.ts-nav-link .ant-btn-text::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 6px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--ts-red);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s var(--ts-ease);
+}
+
+.ts-nav-link .ant-btn-text:hover::after {
+  transform: scaleX(1);
+}
+
+/* Footer links */
+.ts-footer-link {
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.ts-footer-link:hover {
+  color: #ffffff !important;
+}
+
+/* Staggered float-in for hero art */
+@keyframes ts-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.ts-float {
+  animation: ts-float 6s ease-in-out infinite;
+}
+
+/* Responsive hero split */
+@media (max-width: 900px) {
+  .ts-hero-split {
+    grid-template-columns: 1fr !important;
+    min-height: 0 !important;
+  }
+  .ts-hero-split > div:last-child {
+    min-height: 320px;
+  }
+}
+
+/* ---------- Auth split layout ---------- */
+.ts-auth-split {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  background: var(--ts-cream);
+}
+
+.ts-auth-aside {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(40px, 5vw, 76px);
+  background: var(--ts-charcoal);
+}
+
+.ts-auth-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(40px, 6vw, 72px) 24px;
+  background:
+    radial-gradient(700px 420px at 100% 0%, rgba(215, 38, 61, 0.08), transparent 62%),
+    var(--ts-cream);
+}
+
+.ts-auth-mobile-mark {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .ts-auth-split {
+    grid-template-columns: 1fr;
+  }
+  .ts-auth-aside {
+    display: none;
+  }
+  .ts-auth-mobile-mark {
+    display: block;
+  }
 }

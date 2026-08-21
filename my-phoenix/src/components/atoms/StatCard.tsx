@@ -46,7 +46,7 @@ export function StatCard({
   footer?: ReactNode;
 }) {
   return (
-    <Card style={{ height: "100%", borderRadius: 16 }} styles={{ body: { padding: 20 } }}>
+    <Card hoverable style={{ height: "100%" }} styles={{ body: { padding: 22 } }}>
       {loading ? (
         <Skeleton active paragraph={false} />
       ) : (
@@ -56,24 +56,29 @@ export function StatCard({
               <span
                 style={{
                   display: "inline-flex",
-                  width: 36,
-                  height: 36,
-                  borderRadius: 10,
+                  width: 38,
+                  height: 38,
+                  borderRadius: 12,
                   alignItems: "center",
                   justifyContent: "center",
-                  background: BRAND.redSoft,
-                  color: BRAND.red,
-                  fontSize: 18,
+                  background: BRAND.gradientPrimary,
+                  color: BRAND.white,
+                  fontSize: 17,
+                  boxShadow: "0 6px 16px rgba(184,30,51,0.26)",
                 }}
               >
                 {icon}
               </span>
             )}
-            <Text type="secondary" style={{ fontSize: 13 }}>
+            <Text
+              type="secondary"
+              style={{ fontSize: 12, letterSpacing: "0.08em", textTransform: "uppercase", fontWeight: 600 }}
+            >
               {label}
             </Text>
           </div>
-          <div style={{ fontSize: 28, fontWeight: 800, color: BRAND.charcoal, lineHeight: 1.2 }}>
+          <div className="ts-display"
+            style={{ fontSize: 32, fontWeight: 700, color: BRAND.charcoal, lineHeight: 1.15, letterSpacing: "-0.02em" }}>
             {value}
           </div>
           {footer && <div style={{ marginTop: 10 }}>{footer}</div>}

@@ -7,6 +7,7 @@ import Skeleton from "antd/es/skeleton";
 import Title from "antd/es/typography/Title";
 import Text from "antd/es/typography/Text";
 
+import { formatMoney } from "@/components/atoms/PriceTag";
 import { BRAND } from "@/lib/theme";
 import type { RevenuePoint } from "@/lib/types";
 
@@ -15,7 +16,7 @@ function ChartTooltip({ active, payload, label }: TooltipProps<number, string>) 
   return (
     <div style={{ background: BRAND.charcoal, color: BRAND.cream, borderRadius: 10, padding: "8px 12px", fontSize: 13 }}>
       <div style={{ opacity: 0.7, marginBottom: 2 }}>{label}</div>
-      <div style={{ fontWeight: 700 }}>${Number(payload[0].value).toFixed(2)}</div>
+      <div style={{ fontWeight: 700 }}>{formatMoney(Number(payload[0].value))}</div>
     </div>
   );
 }
@@ -30,7 +31,7 @@ export function RevenueTrendChart({ data, loading }: { data: RevenuePoint[]; loa
           Revenue trend
         </Title>
         <Text type="secondary" style={{ fontSize: 13 }}>
-          ${total.toFixed(0)} over {data.length}mo
+          {formatMoney(total)} over {data.length}mo
         </Text>
       </div>
       <Text type="secondary" style={{ fontSize: 13 }}>
@@ -55,7 +56,7 @@ export function RevenueTrendChart({ data, loading }: { data: RevenuePoint[]; loa
                 axisLine={false}
                 tickLine={false}
                 tick={{ fill: BRAND.gray, fontSize: 12 }}
-                tickFormatter={(v: number) => `$${v}`}
+                tickFormatter={(v: number) => `Rs ${v}`}
                 width={48}
               />
               <Tooltip content={<ChartTooltip />} />

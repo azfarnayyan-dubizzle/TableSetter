@@ -6,6 +6,7 @@ import Skeleton from "antd/es/skeleton";
 import Title from "antd/es/typography/Title";
 import Text from "antd/es/typography/Text";
 
+import { formatMoney } from "@/components/atoms/PriceTag";
 import { BRAND } from "@/lib/theme";
 import type { RestaurantSpend } from "@/lib/analytics";
 
@@ -54,7 +55,7 @@ export function TopRestaurantsLeaderboard({
                     {item.name}
                   </Text>
                   <Text style={{ fontSize: 13, fontWeight: 700, color: BRAND.charcoal, whiteSpace: "nowrap" }}>
-                    ${item.total.toFixed(2)}
+                    {formatMoney(item.total)}
                   </Text>
                 </div>
                 <div style={{ height: 8, borderRadius: 999, background: "#F1E7DC", overflow: "hidden" }}>
