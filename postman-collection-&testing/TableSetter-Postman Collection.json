@@ -1,0 +1,575 @@
+{
+  "info": {
+    "name": "Restaurant Platform API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:8000/api" },
+    { "key": "owner_token", "value": "" },
+    { "key": "customer_token", "value": "" },
+    { "key": "restaurant_id", "value": "" },
+    { "key": "category_id", "value": "" },
+    { "key": "menu_item_id", "value": "" },
+    { "key": "review_id", "value": "" },
+    { "key": "dining_log_id", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register Owner",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "if (pm.response.code === 201) {",
+                "  const data = pm.response.json();",
+                "  pm.collectionVariables.set('owner_token', data.token);",
+                "}"
+              ]
+            }
+          }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Test Owner\",\n  \"email\": \"owner@test.com\",\n  \"password\": \"password123\",\n  \"password_confirmation\": \"password123\"\n}"
+            },
+            "url": "{{base_url}}/owner/register"
+          }
+        },
+        {
+          "name": "Login Owner",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "if (pm.response.code === 200) {",
+                "  const data = pm.response.json();",
+                "  pm.collectionVariables.set('owner_token', data.token);",
+                "}"
+              ]
+            }
+          }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"owner@test.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": "{{base_url}}/owner/login"
+          }
+        },
+        {
+          "name": "Get Owner Me",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{owner_token}}" }],
+            "url": "{{base_url}}/owner/me"
+          }
+        },
+        {
+          "name": "Logout Owner",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{owner_token}}" }],
+            "url": "{{base_url}}/owner/logout"
+          }
+        },
+        {
+          "name": "Register Customer",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "if (pm.response.code === 201) {",
+                "  const data = pm.response.json();",
+                "  pm.collectionVariables.set('customer_token', data.token);",
+                "}"
+              ]
+            }
+          }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Test Customer\",\n  \"email\": \"customer@test.com\",\n  \"password\": \"password123\",\n  \"password_confirmation\": \"password123\"\n}"
+            },
+            "url": "{{base_url}}/customer/register"
+          }
+        },
+        {
+          "name": "Login Customer",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "if (pm.response.code === 200) {",
+                "  const data = pm.response.json();",
+                "  pm.collectionVariables.set('customer_token', data.token);",
+                "}"
+              ]
+            }
+          }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"customer@test.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": "{{base_url}}/customer/login"
+          }
+        },
+        {
+          "name": "Get Customer Me",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{customer_token}}" }],
+            "url": "{{base_url}}/customer/me"
+          }
+        },
+        {
+          "name": "Logout Customer",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{customer_token}}" }],
+            "url": "{{base_url}}/customer/logout"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Owner - Profile",
+      "item": [
+        {
+          "name": "Get Owner Profile",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{owner_token}}" }],
+            "url": "{{base_url}}/owner/profile"
+          }
+        },
+        {
+          "name": "Update Owner Profile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{owner_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"business_tax_id\": \"TAX-12345\",\n  \"phone_number\": \"03001234567\"\n}"
+            },
+            "url": "{{base_url}}/owner/profile"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Owner - Restaurants",
+      "item": [
+        {
+          "name": "List My Restaurants",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{owner_token}}" }],
+            "url": "{{base_url}}/owner/restaurants"
+          }
+        },
+        {
+          "name": "Create Restaurant",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "if (pm.response.code === 201) {",
+                "  const data = pm.response.json();",
+                "  pm.collectionVariables.set('restaurant_id', data.data ? data.data.id : data.id);",
+                "}"
+              ]
+            }
+          }],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{owner_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Spice Route\",\n  \"description\": \"Authentic South Asian cuisine\",\n  \"address\": \"123 Main St, Lahore\",\n  \"cuisine_type\": \"Pakistani\",\n  \"price_range\": \"$$\"\n}"
+            },
+            "url": "{{base_url}}/owner/restaurants"
+          }
+        },
+        {
+          "name": "Get Restaurant Detail",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{owner_token}}" }],
+            "url": "{{base_url}}/owner/restaurants/{{restaurant_id}}"
+          }
+        },
+        {
+          "name": "Update Restaurant",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{owner_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"Updated description\"\n}"
+            },
+            "url": "{{base_url}}/owner/restaurants/{{restaurant_id}}"
+          }
+        },
+        {
+          "name": "Delete Restaurant",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{owner_token}}" }],
+            "url": "{{base_url}}/owner/restaurants/{{restaurant_id}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Owner - Categories",
+      "item": [
+        {
+          "name": "List Categories",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{owner_token}}" }],
+            "url": "{{base_url}}/owner/restaurants/{{restaurant_id}}/categories"
+          }
+        },
+        {
+          "name": "Create Category",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "if (pm.response.code === 201) {",
+                "  const data = pm.response.json();",
+                "  pm.collectionVariables.set('category_id', data.data ? data.data.id : data.id);",
+                "}"
+              ]
+            }
+          }],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{owner_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Starters\"\n}"
+            },
+            "url": "{{base_url}}/owner/restaurants/{{restaurant_id}}/categories"
+          }
+        },
+        {
+          "name": "Update Category",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{owner_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Appetizers\"\n}"
+            },
+            "url": "{{base_url}}/owner/categories/{{category_id}}"
+          }
+        },
+        {
+          "name": "Delete Category",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{owner_token}}" }],
+            "url": "{{base_url}}/owner/categories/{{category_id}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Owner - Menu Items",
+      "item": [
+        {
+          "name": "List Menu Items",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{owner_token}}" }],
+            "url": "{{base_url}}/owner/categories/{{category_id}}/menu-items"
+          }
+        },
+        {
+          "name": "Create Menu Item",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "if (pm.response.code === 201) {",
+                "  const data = pm.response.json();",
+                "  pm.collectionVariables.set('menu_item_id', data.data ? data.data.id : data.id);",
+                "}"
+              ]
+            }
+          }],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{owner_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Chicken Samosa\",\n  \"description\": \"Crispy pastry with spiced chicken filling\",\n  \"price\": 250,\n  \"is_available\": true\n}"
+            },
+            "url": "{{base_url}}/owner/categories/{{category_id}}/menu-items"
+          }
+        },
+        {
+          "name": "Update Menu Item",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{owner_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"price\": 275\n}"
+            },
+            "url": "{{base_url}}/owner/menu-items/{{menu_item_id}}"
+          }
+        },
+        {
+          "name": "Delete Menu Item",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{owner_token}}" }],
+            "url": "{{base_url}}/owner/menu-items/{{menu_item_id}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Owner - Reviews",
+      "item": [
+        {
+          "name": "List Restaurant Reviews",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{owner_token}}" }],
+            "url": "{{base_url}}/owner/restaurants/{{restaurant_id}}/reviews"
+          }
+        },
+        {
+          "name": "Reply to Review",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{owner_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"owner_reply\": \"Thank you for your feedback!\"\n}"
+            },
+            "url": "{{base_url}}/owner/reviews/{{review_id}}/reply"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Customer - Profile",
+      "item": [
+        {
+          "name": "Get Customer Profile",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{customer_token}}" }],
+            "url": "{{base_url}}/customer/profile"
+          }
+        },
+        {
+          "name": "Update Customer Profile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{customer_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phone_number\": \"03007654321\",\n  \"dietary_preferences\": \"Vegetarian\"\n}"
+            },
+            "url": "{{base_url}}/customer/profile"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Customer - Reviews",
+      "item": [
+        {
+          "name": "Create Review",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "if (pm.response.code === 201) {",
+                "  const data = pm.response.json();",
+                "  pm.collectionVariables.set('review_id', data.data ? data.data.id : data.id);",
+                "}"
+              ]
+            }
+          }],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{customer_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rating\": 5,\n  \"comment\": \"Amazing food and great service!\"\n}"
+            },
+            "url": "{{base_url}}/customer/restaurants/{{restaurant_id}}/reviews"
+          }
+        },
+        {
+          "name": "Update Review",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{customer_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rating\": 4,\n  \"comment\": \"Updated review after second visit\"\n}"
+            },
+            "url": "{{base_url}}/customer/reviews/{{review_id}}"
+          }
+        },
+        {
+          "name": "Delete Review",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{customer_token}}" }],
+            "url": "{{base_url}}/customer/reviews/{{review_id}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Customer - Dining Logs",
+      "item": [
+        {
+          "name": "List Dining Logs",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{customer_token}}" }],
+            "url": "{{base_url}}/customer/dining-logs"
+          }
+        },
+        {
+          "name": "Create Dining Log",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "if (pm.response.code === 201) {",
+                "  const data = pm.response.json();",
+                "  pm.collectionVariables.set('dining_log_id', data.data ? data.data.id : data.id);",
+                "}"
+              ]
+            }
+          }],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{customer_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"restaurant_id\": {{restaurant_id}},\n  \"amount_spent\": 1250.50,\n  \"note\": \"Dinner with friends\"\n}"
+            },
+            "url": "{{base_url}}/customer/dining-logs"
+          }
+        },
+        {
+          "name": "Update Dining Log",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{customer_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount_spent\": 1400\n}"
+            },
+            "url": "{{base_url}}/customer/dining-logs/{{dining_log_id}}"
+          }
+        },
+        {
+          "name": "Delete Dining Log",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{customer_token}}" }],
+            "url": "{{base_url}}/customer/dining-logs/{{dining_log_id}}"
+          }
+        },
+        {
+          "name": "Monthly Summary",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{customer_token}}" }],
+            "url": "{{base_url}}/customer/dining-logs/summary"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Public",
+      "item": [
+        {
+          "name": "List Restaurants",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/restaurants"
+          }
+        },
+        {
+          "name": "Get Restaurant Detail",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/restaurants/{{restaurant_id}}"
+          }
+        },
+        {
+          "name": "Search Restaurants",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/search/restaurants?q=pizza"
+          }
+        }
+      ]
+    }
+  ]
+}
