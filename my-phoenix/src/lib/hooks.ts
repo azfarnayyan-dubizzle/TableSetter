@@ -2,7 +2,6 @@
 
 import { useMutation, useQuery, useQueryClient, type QueryKey } from "@tanstack/react-query";
 import { message } from "antd";
-
 import { api, extractErrorMessage } from "./api";
 import { unwrap, unwrapList } from "./unwrap";
 import type {
@@ -14,6 +13,7 @@ import type {
   Restaurant,
   Review,
   SpendingSummary,
+  RestaurantAnalytics,
 } from "./types";
 
 /* ---------------------------------- public --------------------------------- */
@@ -190,5 +190,16 @@ export function useApiMutation<TVars>({
     onError: (error: unknown) => {
       message.error(extractErrorMessage(error));
     },
+  });
+}
+
+export function useOwnerRestaurantAnalytics(id: string | number, enabled: boolean) {
+  return useQuery({
+    queryKey: ["owner", "restaurant", id, "analytics"],
+    queryFn: async () => {
+      const { data } = await api.get(`/owner/restaurants/${id}/analytics`);
+      return (data as unknown as { data?: RestaurantAnalytics }).data ?? (data as RestaurantAnalytics);
+    },
+    enabled: enabled && Boolean(id),
   });
 }
