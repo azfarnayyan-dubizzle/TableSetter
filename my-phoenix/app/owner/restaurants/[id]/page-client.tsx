@@ -1,8 +1,19 @@
 "use client";
 
+import Link from "next/link";
 import { useParams } from "next/navigation";
 
-import { Alert, Card, Col, Empty, Form, Input, Modal, Row, Skeleton } from "antd";
+import Alert from "antd/es/alert";
+import Button from "antd/es/button";
+import Card from "antd/es/card";
+import Col from "antd/es/col";
+import Empty from "antd/es/empty";
+import Form from "antd/es/form";
+import FormItem from "antd/es/form/FormItem";
+import TextArea from "antd/es/input/TextArea";
+import Modal from "antd/es/modal";
+import Row from "antd/es/row";
+import Skeleton from "antd/es/skeleton";
 import { useState } from "react";
 
 import { ReviewCard } from "@/components/molecules/ReviewCard";
@@ -13,7 +24,6 @@ import { api, extractErrorMessage } from "@/lib/api";
 import { useAuthToken } from "@/lib/auth";
 import { useApiMutation, useOwnerRestaurant, useOwnerRestaurantReviews } from "@/lib/hooks";
 import type { Review } from "@/lib/types";
-
 
 export default function ManageRestaurantPage() {
   const { id } = useParams<{ id: string }>();
@@ -41,7 +51,15 @@ export default function ManageRestaurantPage() {
   });
 
   return (
-    <DashboardLayout role="owner" title={restaurant?.name ?? "Manage restaurant"}>
+    <DashboardLayout
+      role="owner"
+      title={restaurant?.name ?? "Manage restaurant"}
+      extra={
+        <Link href={`/owner/restaurants/${id}/analytics`}>
+          <Button>View analytics</Button>
+        </Link>
+      }
+    >
       {error && (
         <Alert
           type="error"
@@ -113,13 +131,13 @@ export default function ManageRestaurantPage() {
             );
           }}
         >
-          <Form.Item
+          <FormItem
             name="owner_reply"
             label="Your reply"
             rules={[{ required: true, message: "Write a reply" }, { max: 1000 }]}
           >
-            <Input.TextArea rows={4} placeholder="Thanks for dining with us…" />
-          </Form.Item>
+            <TextArea rows={4} placeholder="Thanks for dining with us…" />
+          </FormItem>
         </Form>
       </Modal>
     </DashboardLayout>

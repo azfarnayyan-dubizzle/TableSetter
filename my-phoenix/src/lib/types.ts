@@ -93,3 +93,19 @@ export type Paginated<T> = {
   per_page?: number;
   total?: number;
 };
+
+export type RevenuePoint = { month: string; label: string; total: number };
+export type RatingPoint = { month: string; label: string; avg_rating: number | null };
+export type RatingBucket = { rating: number; count: number };
+
+export type RestaurantAnalytics = {
+  total_revenue: number;
+  visit_count: number;
+  avg_spend_per_visit: number;
+  revenue_trend: RevenuePoint[];
+  rating_trend: RatingPoint[];
+  rating_distribution: RatingBucket[];
+  avg_rating: number;
+  reviews_count: number;
+  reply_rate: number;
+};
