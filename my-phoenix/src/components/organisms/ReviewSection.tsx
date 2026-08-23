@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Button, Card, Empty, Form, Input, Modal, Rate, Typography } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { ReviewCard } from "@/components/molecules/ReviewCard";
 import { api } from "@/lib/api";
@@ -23,7 +23,35 @@ export function ReviewSection({
   const [editing, setEditing] = useState<Review | null>(null);
   const [form] = Form.useForm<ReviewFormValues>();
   const [editForm] = Form.useForm<ReviewFormValues>();
+  const [mergedReviews, setMergedReviews] = useState<Review[]>(reviews);
   const invalidate = [["restaurant", String(restaurantId)]];
+
+  useEffect(() => {
+    // start from provided reviews and try to fetch owner-side reviews which may include
+    // a nested `reply` object; merge owner reply text into our review objects.
+    setMergedReviews(reviews);
+    let mounted = true;
+    (async () => {
+      try {
+        const { data } = await api.get(`/owner/restaurants/${restaurantId}/reviews`);
+        const items = (data && data.data) ? data.data : data;
+        if (!Array.isArray(items)) return;
+        const byId = new Map<number, any>();
+        items.forEach((r: any) => byId.set(r.id, r));
+        const merged = reviews.map((r) => {
+          const ownerRow = byId.get(r.id);
+          const owner_reply = ownerRow?.reply?.owner_reply ?? ownerRow?.owner_reply ?? r.owner_reply ?? null;
+          return { ...r, owner_reply } as Review;
+        });
+        if (mounted) setMergedReviews(merged);
+      } catch (e) {
+        // ignore - fall back to provided reviews
+      }
+    })();
+    return () => {
+      mounted = false;
+    };
+  }, [restaurantId, reviews]);
 
   const createReview = useApiMutation<ReviewFormValues>({
     request: (values) =>
@@ -91,10 +119,10 @@ export function ReviewSection({
         </Typography.Paragraph>
       )}
 
-      {reviews.length === 0 ? (
+      {mergedReviews.length === 0 ? (
         <Empty description="No reviews yet — be the first" />
       ) : (
-        reviews.map((review) => (
+        mergedReviews.map((review) => (
           <ReviewCard
             key={review.id}
             review={review}

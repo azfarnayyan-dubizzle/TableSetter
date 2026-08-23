@@ -68,7 +68,7 @@ export default function RestaurantAnalyticsPage() {
           <StatCard
             icon={<DollarOutlined />}
             label="Total revenue"
-            value={`$${(analytics?.total_revenue ?? 0).toFixed(2)}`}
+            value={`Rs ${Math.round(analytics?.total_revenue ?? 0).toLocaleString("en-PK")}`}
             loading={isPending}
           />
         </Col>
@@ -81,7 +81,7 @@ export default function RestaurantAnalyticsPage() {
             footer={
               analytics && analytics.visit_count > 0 ? (
                 <span style={{ fontSize: 12, color: "#8A8378" }}>
-                  ${analytics.avg_spend_per_visit.toFixed(2)} avg / visit
+                  Rs {Math.round(analytics.avg_spend_per_visit).toLocaleString("en-PK")} avg / visit
                 </span>
               ) : undefined
             }

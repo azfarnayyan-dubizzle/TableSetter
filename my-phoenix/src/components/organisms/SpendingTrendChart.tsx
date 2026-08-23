@@ -7,6 +7,7 @@ import Skeleton from "antd/es/skeleton";
 import Title from "antd/es/typography/Title";
 import Text from "antd/es/typography/Text";
 
+import { formatMoney } from "@/components/atoms/PriceTag";
 import { BRAND } from "@/lib/theme";
 import type { MonthlyPoint } from "@/lib/analytics";
 
@@ -23,7 +24,7 @@ function ChartTooltip({ active, payload, label }: TooltipProps<number, string>) 
       }}
     >
       <div style={{ opacity: 0.7, marginBottom: 2 }}>{label}</div>
-      <div style={{ fontWeight: 700 }}>${Number(payload[0].value).toFixed(2)}</div>
+      <div style={{ fontWeight: 700 }}>{formatMoney(Number(payload[0].value))}</div>
     </div>
   );
 }
@@ -39,7 +40,7 @@ export function SpendingTrendChart({ data, loading }: { data: MonthlyPoint[]; lo
           Spending trend
         </Title>
         <Text type="secondary" style={{ fontSize: 13 }}>
-          Avg ${avg.toFixed(0)}/mo
+          Avg {formatMoney(avg)}/mo
         </Text>
       </div>
       <Text type="secondary" style={{ fontSize: 13 }}>
@@ -69,7 +70,7 @@ export function SpendingTrendChart({ data, loading }: { data: MonthlyPoint[]; lo
                 axisLine={false}
                 tickLine={false}
                 tick={{ fill: BRAND.gray, fontSize: 12 }}
-                tickFormatter={(v: number) => `$${v}`}
+                tickFormatter={(v: number) => `Rs ${v}`}
                 width={48}
               />
               <Tooltip content={<ChartTooltip />} />

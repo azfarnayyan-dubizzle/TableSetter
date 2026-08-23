@@ -83,9 +83,14 @@ export function DashboardLayout({
         collapsedWidth={0}
         trigger={null}
         style={{
-          background: BRAND.creamDeep,
+          background: BRAND.white,
           borderRight: `1px solid ${BRAND.border}`,
-          padding: "24px 12px",
+          padding: "26px 14px",
+          boxShadow: "1px 0 24px rgba(26,24,23,0.04)",
+          position: "sticky",
+          top: 0,
+          height: "100vh",
+          overflow: "auto",
         }}
       >
         <Link href="/" style={{ textDecoration: "none" }}>
@@ -102,7 +107,20 @@ export function DashboardLayout({
             Table<span style={{ color: BRAND.red }}>setter</span>
           </div>
         </Link>
-        <span className="ts-eyebrow" style={{ color: BRAND.grayLight, margin: "0 14px 8px", display: "block" }}>
+        <span
+          style={{
+            display: "inline-block",
+            margin: "0 12px 14px",
+            padding: "5px 12px",
+            borderRadius: 999,
+            background: BRAND.redSoft,
+            color: BRAND.redDark,
+            fontSize: 11,
+            fontWeight: 700,
+            letterSpacing: "0.14em",
+            textTransform: "uppercase",
+          }}
+        >
           {role === "owner" ? "Owner" : "Diner"}
         </span>
         {nav}
@@ -116,9 +134,9 @@ export function DashboardLayout({
             gap: 12,
             flexWrap: "wrap",
             height: "auto",
-            background: "rgba(253, 248, 240, 0.9)",
+            background: "rgba(255, 255, 255, 0.78)",
             backdropFilter: "saturate(140%) blur(10px)",
-            padding: "16px 28px",
+            padding: "18px 28px",
             borderBottom: `1px solid ${BRAND.border}`,
             position: "sticky",
             top: 0,
@@ -152,7 +170,7 @@ export function DashboardLayout({
         placement="left"
         title="Tablesetter"
         width={272}
-        styles={{ body: { background: BRAND.creamDeep } }}
+        styles={{ body: { background: BRAND.white } }}
         className="ts-sider"
       >
         {nav}

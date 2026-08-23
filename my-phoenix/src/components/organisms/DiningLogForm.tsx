@@ -69,7 +69,7 @@ export function DiningLogForm({
             { type: "number", min: 0, message: "Amount cannot be negative" },
           ]}
         >
-          <InputNumber min={0} step={1} precision={2} prefix="$" style={{ width: "100%" }} />
+          <InputNumber min={0} step={1} precision={0} prefix="Rs" style={{ width: "100%" }} />
         </Form.Item>
         <Form.Item name="logged_at" label="Date">
           <DatePicker style={{ width: "100%" }} />
