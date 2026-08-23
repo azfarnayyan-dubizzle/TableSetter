@@ -52,7 +52,7 @@ export function useLogout(role: Role) {
     }
     clearToken(role);
     queryClient.clear();
-    router.push(role === "owner" ? "/owner/login" : "/customer/login");
+    void router.push(role === "owner" ? "/owner/login" : "/customer/login");
   }, [router, queryClient, role]);
 }
 
@@ -63,7 +63,7 @@ export function useRequireAuth(role: Role): boolean {
 
   useEffect(() => {
     if (ready && !token) {
-      router.push(role === "owner" ? "/owner/login" : "/customer/login");
+      void router.push(role === "owner" ? "/owner/login" : "/customer/login");
     }
   }, [router, ready, role, token]);
 

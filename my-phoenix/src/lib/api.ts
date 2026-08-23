@@ -1,6 +1,8 @@
 import axios, { AxiosError } from "axios";
 
-export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000/api";
+export const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_URL ??
+  "http://localhost:8000/api";
 
 export type Role = "owner" | "customer";
 
@@ -31,9 +33,6 @@ export const api = axios.create({
   headers: { Accept: "application/json", "Content-Type": "application/json" },
 });
 
-// Auto-attaches the correct token (owner or customer) based on which
-// prefix the request URL starts with, so callers never manually set
-// the Authorization header themselves.
 api.interceptors.request.use((config) => {
   const url = config.url ?? "";
   const role: Role | null = url.startsWith("/owner")
