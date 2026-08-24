@@ -6,8 +6,24 @@
 
 ---
 
+## 🌐 Deployment
+
+| Service | Link |
+|---|---|
+| 🎨 Frontend (Vercel) | https://tablesetter.vercel.app/ |
+| ⚙️ Backend API (Railway) | https://tablesetter-production.up.railway.app/api/restaurants |
+| Database (Railway) | Postgres DB |
+
+## 📸 Screenshots & Demo
+
+**[Screenshots & Demo](#-screenshots--demo-1)** a walkthrough of the app.
+
+---
+
 ## 📖 Table of Contents
 
+- 🌐 [Deployment](#-deployment)
+- 📸 [Screenshots & Demo](#-screenshots--demo)
 - 🌟 [Overview](#-overview)
 - 🛠️ [Tech Stack](#️-tech-stack)
 - 🏗️ [System Architecture](#️-system-architecture)
@@ -20,6 +36,7 @@
 - 📁 [Project Structure](#-project-structure)
 - 🚀 [Getting Started](#-getting-started)
 - 🚫 [Out of Scope](#-out-of-scope)
+- 📸 [Screenshots & Demo (full)](#-screenshots--demo-1)
 
 ---
 
@@ -417,6 +434,50 @@ The following are explicitly **not** part of this training project:
 - 📍 Geo-based ("near me") location search
 - 🍽️ In-app table ordering
 - 💱 Multi-currency support
+
+---
+
+## 📸 Screenshots & Demo
+
+### 🏠 Landing / Restaurant Listing
+ 
+![Landing / Restaurant Listing](./documentation/assets/landing.png)
+
+### Login / Signup (Owner/Customer)
+ 
+![Login / Signup ](./documentation/assets/auth.png)
+
+### Restaurant Listing
+ 
+![Restaurant Listing](./documentation/assets/restauratns.png)
+
+### 🛠️ Owner Dashboard
+ 
+![Owner Dashboard](./documentation/assets/owner.png)
+
+### 🛠️ Customer Dashboard
+ 
+![Customer Dashboard](./documentation/assets/customer.png)
+
+### 🏪 Restaurant Profile & Menu
+ 
+![Restaurant Profile & Menu](./documentation/assets/res.png)
+
+### 💰 Dining Logs
+ 
+![Dining Logs](./documentation/assets/dining.png)
+
+### ⭐ Manage Resturant (Owner)
+ 
+![Manage Resturant (Owner)](./documentation/assets/manage-res.png)
+ 
+### ⭐ Reviews & Ratings
+ 
+![Reviews & Ratings](./documentation/assets/review.png)
+ 
+ 
+
+**[⬆ Back to top](#-tablesetter)**
 
 ---
 
