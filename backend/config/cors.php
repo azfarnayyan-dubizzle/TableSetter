@@ -7,7 +7,7 @@ return [
     'allowed_methods' => ['*'],
 
     'allowed_origins' => [
-        'http://localhost:3000',
+        'https://tablesetter.vercel.app',
     ],
 
     'allowed_origins_patterns' => [],
