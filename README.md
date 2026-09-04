@@ -51,7 +51,7 @@
 
 ## 🛠️ Tech Stack
 
-### 🎨 Frontend
+### 🎨 Frontend 
 
 - ⚛️ React 19.x
 - ▲ Next.js 16.x (App Router)
@@ -62,7 +62,7 @@
 - 🧱 Atomic Design structure — `atoms/` `icons/` `molecules/` `organisms/` `templates/`
 - ☁️ Deploy: Vercel
 
-### ⚙️ Backend
+### ⚙️ Backend 
 
 - 🐘 Laravel (PHP 8.2)
 - 🐳 Laravel Sail (Docker dev environment)
@@ -398,7 +398,7 @@ tablesetter/
 - 🟢 Node.js 20+
 - 🐘 PHP 8.2+ / Composer
 
-### ⚙️ Backend 
+### ⚙️ Backend
 
 ```bash
 cd frontend
