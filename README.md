@@ -51,7 +51,7 @@
 
 ## 🛠️ Tech Stack
 
-### 🎨 Frontend — `my-phoenix`
+### 🎨 Frontend 
 
 - ⚛️ React 19.x
 - ▲ Next.js 16.x (App Router)
@@ -62,7 +62,7 @@
 - 🧱 Atomic Design structure — `atoms/` `icons/` `molecules/` `organisms/` `templates/`
 - ☁️ Deploy: Vercel
 
-### ⚙️ Backend — `my-toblerone`
+### ⚙️ Backend 
 
 - 🐘 Laravel (PHP 8.2)
 - 🐳 Laravel Sail (Docker dev environment)
@@ -398,7 +398,7 @@ tablesetter/
 - 🟢 Node.js 20+
 - 🐘 PHP 8.2+ / Composer
 
-### ⚙️ Backend — `my-toblerone`
+### ⚙️ Backend
 
 ```bash
 cd my-toblerone
@@ -407,7 +407,7 @@ cp .env.example .env
 ./vendor/bin/sail artisan migrate --seed
 ```
 
-### 🎨 Frontend — `my-phoenix`
+### 🎨 Frontend 
 
 ```bash
 cd my-phoenix
