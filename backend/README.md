@@ -1,4 +1,4 @@
-# ⚙️ my-toblerone
+# ⚙️ backend
 
 ### Backend — TableSetter API
 
@@ -52,7 +52,7 @@ cp .env.example .env
 ## 📁 Structure
 
 ```
-my-toblerone/
+backend/
 ├── app/
 │   └── Http/Controllers/
 │       ├── Auth/
