@@ -2,8 +2,6 @@
 
 ### Restaurant Management & Customer Insights Platform
 
-`my-phoenix` — frontend · `my-toblerone` — backend
-
 ---
 
 ## 🌐 Deployment
