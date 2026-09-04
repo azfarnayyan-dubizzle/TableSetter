@@ -89,14 +89,14 @@
 ```mermaid
 flowchart TB
     subgraph Client["🖥️ Client Layer"]
-        A["my-phoenix<br/>React · Next.js · AntD"]
+        A["frontend<br/>React · Next.js · AntD"]
     end
 
     subgraph Edge["☁️ Edge / Delivery"]
         V["Vercel"]
     end
 
-    subgraph API["⚙️ Backend — my-toblerone (Laravel)"]
+    subgraph API["⚙️ Backend (Laravel)"]
         S["🔐 Sanctum<br/>Auth Middleware"]
         C1["Owner Controllers"]
         C2["Customer Controllers"]
@@ -134,8 +134,8 @@ Example: a customer submitting a restaurant review, end to end.
 ```mermaid
 sequenceDiagram
     actor Customer
-    participant FE as 🎨 my-phoenix
-    participant API as ⚙️ my-toblerone
+    participant FE as 🎨 frontend
+    participant API as ⚙️ backend
     participant Auth as 🔐 Sanctum
     participant Ctrl as ReviewController
     participant DB as 🗄️ PostgreSQL
@@ -385,8 +385,8 @@ classDiagram
 
 ```
 tablesetter/
-├── my-phoenix/                  # Frontend — Next.js
-└── my-toblerone/                # Backend — Laravel
+├── frontend/                  # Frontend — Next.js
+└── backend/                # Backend — Laravel
 ```
 
 ---
@@ -401,7 +401,7 @@ tablesetter/
 ### ⚙️ Backend
 
 ```bash
-cd my-toblerone
+cd frontend
 cp .env.example .env
 ./vendor/bin/sail up -d
 ./vendor/bin/sail artisan migrate --seed
@@ -410,7 +410,7 @@ cp .env.example .env
 ### 🎨 Frontend 
 
 ```bash
-cd my-phoenix
+cd backend
 npm install
 npm run dev
 ```

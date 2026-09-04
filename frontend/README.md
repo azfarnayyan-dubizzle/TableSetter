@@ -1,4 +1,4 @@
-# 🎨 my-phoenix
+# 🎨 frontend
 
 ### Frontend — TableSetter Web App
 
@@ -20,7 +20,7 @@ Web client for the TableSetter restaurant management & customer insights platfor
 ## 🧱 Structure — Atomic Design
 
 ```
-my-phoenix/
+backend/
 └── src/
     ├── atoms/
     ├── icons/
@@ -43,7 +43,7 @@ my-phoenix/
 
 ### ✅ Prerequisites
 - 🟢 Node.js 20+
-- Backend (`my-toblerone`) running locally or a reachable API URL
+- Backend (`backend`) running locally or a reachable API URL
 
 ### ⚙️ Setup
 
@@ -66,7 +66,7 @@ NEXT_PUBLIC_API_URL=http://localhost/api
 
 - 🔐 Auth — Laravel Sanctum (token-based)
 - 📡 Data fetching — Axios + TanStack React Query
-- ⚙️ Backend — `my-toblerone` (Laravel API)
+- ⚙️ Backend — `backend` (Laravel API)
 
 > Full architecture diagrams and feature list live in the [root README](../README.md).
 
